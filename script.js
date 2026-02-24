@@ -211,7 +211,7 @@ hiddenInput.addEventListener("input", (e) => {ž
 
     spans.forEach(span => span.classList.remove("current"))
 
-    if (e.key === expected) {  
+    if (hiddenInput.value === expected) {  
         spans[currentIndex].classList.add("correct")
     } else {
         spans[currentIndex].classList.add("incorrect")
@@ -293,3 +293,4 @@ window.addEventListener("keydown", (e) =>  {
         }
     }
 })
+
