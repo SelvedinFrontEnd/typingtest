@@ -166,7 +166,7 @@ function calculateWpm() {
     
 }
 
-hiddenInput.addEventListener("input", (e) => {ž
+hiddenInput.addEventListener("input", (e) => {
     if(!isTestActive) return;
 
     const typedChar = hiddenInput.value;
@@ -298,3 +298,4 @@ window.addEventListener("keydown", (e) =>  {
         }
     }
 })
+
