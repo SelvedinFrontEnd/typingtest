@@ -171,6 +171,8 @@ hiddenInput.addEventListener("input", (e) => {ž
 
     const typedChar = hiddenInput.value;
     hiddenInput.value = "";
+    document.getElementById("debug").innerText =
+  "Typed: " + JSON.stringify(hiddenInput.value);
     if(ignoredKeys.includes(e.key)) return;
     
     spans = text.querySelectorAll("span");
