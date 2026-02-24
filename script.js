@@ -232,3 +232,18 @@ window.addEventListener("keydown", (e) =>  {
 
 })
 
+testSection.addEventListener("click", () => {
+    const hiddenInput = document.getElementById("hidden-input");
+    
+    // Focus the hidden input to open mobile keyboard
+    hiddenInput.focus();
+
+    // Also start the test if it hasn’t started yet
+    if (!isTestActive) {
+        startTest.click(); // reuse your existing startTest logic
+    }
+});
+
+hiddenInput.addEventListener("blur", () => {
+    if(isTestActive) hiddenInput.focus();
+});
