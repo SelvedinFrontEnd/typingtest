@@ -12,6 +12,7 @@ let textTest;
 let correct;
 let testSection = document.getElementById("test-section")
 let testCompleted = document.getElementById("results")
+let hidenInput = document.getElementById("hiden-input")
 
 let best = localStorage.getItem("bestWPM");
 if (best) {
@@ -164,6 +165,10 @@ function calculateWpm() {
 }
 
 document.addEventListener("keydown", (e) => {
+    startTeste(e)
+})
+
+hiddenInput.addEventListener("keydown", (e) => {
     startTeste(e)
 })
 
