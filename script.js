@@ -169,6 +169,8 @@ function calculateWpm() {
 hiddenInput.addEventListener("input", (e) => {ž
     if(!isTestActive) return;
 
+    const typedChar = hiddenInput.value;
+    hiddenInput.value = "";
     if(ignoredKeys.includes(e.key)) return;
     
     spans = text.querySelectorAll("span");
@@ -211,7 +213,7 @@ hiddenInput.addEventListener("input", (e) => {ž
 
     spans.forEach(span => span.classList.remove("current"))
 
-    if (hiddenInput.value === expected) {  
+    if (typedChar === expected) {  
         spans[currentIndex].classList.add("correct")
     } else {
         spans[currentIndex].classList.add("incorrect")
@@ -229,6 +231,7 @@ hiddenInput.addEventListener("input", (e) => {ž
 document.addEventListener("keydown", (e) => {
     if(!isTestActive) return;
 
+    
     if(ignoredKeys.includes(e.key)) return;
     
     spans = text.querySelectorAll("span");
