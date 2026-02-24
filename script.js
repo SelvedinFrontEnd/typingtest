@@ -165,7 +165,7 @@ function calculateWpm() {
     
 }
 
-document.addEventListener("keydown", (e) => {
+testSection.addEventListener("keydown", (e) => {
     if(!isTestActive) return;
 
     if(ignoredKeys.includes(e.key)) return;
@@ -235,4 +235,5 @@ window.addEventListener("keydown", (e) =>  {
 
 hiddenInput.addEventListener("blur", () => {
     if(isTestActive) hiddenInput.focus();
+
 });
