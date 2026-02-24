@@ -12,7 +12,6 @@ let textTest;
 let correct;
 let testSection = document.getElementById("test-section")
 let testCompleted = document.getElementById("results")
-let hidenInput = document.getElementById("hiden-input")
 
 let best = localStorage.getItem("bestWPM");
 if (best) {
@@ -164,35 +163,9 @@ function calculateWpm() {
     
 }
 
+
+
 document.addEventListener("keydown", (e) => {
-    startTeste(e)
-})
-
-hidenInput.addEventListener("keydown", (e) => {
-    startTeste(e)
-})
-
-testSection.addEventListener("click", () => {
-    const hiddenInput = document.getElementById("hidden-input");
-    
-    // Focus the hidden input to open mobile keyboard
-    hiddenInput.focus();
-
-    // Also start the test if it hasn’t started yet
-    if (!isTestActive) {
-        startTeste(); // reuse your existing startTest logic
-    }
-});
-
-window.addEventListener("keydown", (e) =>  {
-    if(e.key === " " || e.keyCode == 32) {
-        if(e.target.tagName !== "INPUT" && e.target.tagName !== "TEXTAREA") {
-            e.preventDefault();
-        }
-    }
-})
-
-function startTeste(e) {
     if(!isTestActive) return;
 
     if(ignoredKeys.includes(e.key)) return;
@@ -248,6 +221,14 @@ function startTeste(e) {
 
     if(currentIndex < spans.length) {
         spans[currentIndex].classList.add("current")
-    }    
-}
+    } 
+})    
 
+
+window.addEventListener("keydown", (e) =>  {
+    if(e.key === " " || e.keyCode == 32) {
+        if(e.target.tagName !== "INPUT" && e.target.tagName !== "TEXTAREA") {
+            e.preventDefault();
+        }
+    }
+})
