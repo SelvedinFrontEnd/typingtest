@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  <link rel="stylesheet" href="style.css">
+  
+  <title>Frontend Mentor | Typing Speed Test</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    .attribution { font-size: 11px; text-align: center; }
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+<body>
+  <div class="header">
+        <img class="logo" src="./assets/images/logo-small.svg" alt="Logo">
+        <div class="best-score">
+          <img src="./assets/images/icon-personal-best.svg" alt="Trohpy"> 
+          <p>Best: <span id="best-wpm">0</span> <span>WPM</span></p>
+        </div>
+      </div>
+
+  <section class="not-started" id="test-section">
+
+    
+
+    <div class="stats">
+      <div class="stat">
+        <p>WPM:</p>
+        <p id="wpm">0</p> 
+      </div>
+      <div class="stat">
+        <p>Accuracy:</p>
+        <p id="accuracy">0%</p> 
+      </div>
+      <div class="stat">
+        <p>Time:</p>
+        <p>0:<span id="timer">60</span></p> 
+      </div>
+    </div>
+
+    <div class="selects">
+        <select name="mode" id="mode">
+          
+          <option value="easy">Easy</option>
+          <option value="medium">Medium</option>
+          <option value="hard">Hard</option>
+        </select>
+
+
+        <select name="mode" id="time-mode">
+        <option value="timed" id="timed-option">Timed (60)</option>
+        <option value="passage" id="passage-option">Passage</option>
+      </select>
+    </div>
+    
+    <div class="hr">
+    </div>
+      
+    <div class="text">
+      <div id="text">The kitchen smelled of fresh coffee and toast. 
+      Mom was making breakfast while dad read the news. 
+      It was a normal morning in their small but cozy home.</div>
+    
+    <!-- Passage -->
+
+      <div class="center" id="center">
+        <button id="start-test" class="start-test">Start Typing Test</button> 
+        <p>Or click the text and start typing</p>
+      </div>
+      <div class="overlay"></div>
+    </div>
+
+    <div class="hr">
+    </div>
+
+     
+    
+    <button class="restart-button" id="restart-button">Restart Test 
+      <span><img src="./assets/images/icon-restart.svg" alt="restart"></span> 
+    </button>
+  </section>
+
+  <!-- Test Complete Start -->
+
+  <section class="results" id="results">
+
+    <div class="stars">
+      <img src="./assets/images/pattern-star-2.svg" alt="Star" class="star">
+      <div class="circle">
+        <img src="./assets/images/icon-completed.svg" alt="Completed" class="check-circle">
+      </div>
+    </div>
+  
+
+  <div class="header-title">
+    <h1>Test Complete!</h1>
+    <p>Solid run. Keep pushing to beat your high score.</p>
+  </div>
+
+  <div class="boxes">
+    <div>
+      <h3>WPM:</h3>
+      <p id="wpm-final">85</p>
+    </div>
+    <div>
+      <h3>Accuracy:</h3>
+      <p id="accuracy-final">90%</p>
+    </div>
+    <div>
+      <h3>Characters</h3>
+      <p id="characters"><span id="all-char">16</span>/<span id="incorrect-char">16</span></p>
+    </div>
+  </div>
+
+  <button class="go-again">Go Again 
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20">
+      <path fill="currentColor" d="M1.563 1.281h.949c.246 0 .422.211.422.457l-.07 3.446a8.6 8.6 0 0 1 7.277-3.868c4.816 0 8.718 3.938 8.718 8.72-.035 4.816-3.937 8.683-8.718 8.683a8.86 8.86 0 0 1-5.871-2.215.446.446 0 0 1 0-.633l.703-.703c.14-.14.386-.14.562 0 1.23 1.09 2.813 1.723 4.606 1.723A6.88 6.88 0 0 0 17.03 10c0-3.797-3.093-6.89-6.89-6.89-2.813 0-5.203 1.687-6.293 4.078l4.43-.106c.245 0 .456.176.456.422v.95c0 .245-.21.421-.421.421h-6.75a.406.406 0 0 1-.422-.422v-6.75c0-.21.175-.422.422-.422"/>
+    </svg>
+  </button>
+  <img class="star-1" src="assets/images/pattern-star-1.svg" alt="">
+  </section>
+  <!-- Test Complete End --> 
+
+  <section class="out-of-time" id="out-of-time">
+    <h1>You run out of time</h1>
+    <p></p>
+  </section>
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
+    Coded by <a href="https://selvedin.netlify.app/">Selvedin</a>.
+  </div>
+</body>
+<script src="script.js"></script>
+</html>

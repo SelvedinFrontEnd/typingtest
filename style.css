@@ -1,0 +1,351 @@
+/* 1. Use a more-intuitive box-sizing model */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+/* 2. Remove default margin */
+*:not(dialog) {
+  margin: 0;
+}
+/* 3. Enable keyword animations */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    interpolate-size: allow-keywords;
+  }
+}
+body {
+  /* 4. Add accessible line-height */
+  line-height: 1.5;
+  /* 5. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+/* 6. Improve media defaults */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+/* 7. Inherit fonts for form controls */
+input, button, textarea, select {
+  font: inherit;
+}
+/* 8. Avoid text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+/* 9. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1, h2, h3, h4, h5, h6 {
+  text-wrap: balance;
+}
+/*
+  10. Create a root stacking context
+*/
+#root, #__next {
+  isolation: isolate;
+}
+
+@font-face {
+    font-family: Sora;
+    src: url(./assets/fonts/Sora/Sora-VariableFont_wght.ttf);
+}
+
+body {
+    font-family: Sora, sans-serif ;
+    background-color: hsl(0, 0%, 7%);
+    color: hsl(0, 0%, 100%);
+    font-size: 16px;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    margin: 1rem;
+    justify-content: space-between;
+}
+
+.best-score {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.5rem;
+    color: hsl(240, 1%, 59%);
+}
+
+.best-score span {
+    color: hsl(0, 0%, 100%);
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+    justify-content: space-between;;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 400;
+    color: hsl(240, 1%, 59%);
+}
+
+.stat p:nth-child(2) {
+    color: white;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.selects {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem;
+    margin: 1rem;
+}
+
+select {
+  background-color: hsl(0, 0%, 7%);
+  color: white;
+  border-radius: 0.5rem;
+  width: 100%;
+  
+  justify-content: space-between;
+  border: 1px solid hsl(240, 1%, 59%);
+
+  &, &::picker(select) {
+    appearance: base-select;
+    background-color: hsl(0, 0%, 7%);
+    
+  }
+
+  &::picker(select) {
+    margin-block-start: 0.5rem;
+    background-color: hsl(0, 0%, 15%);
+    border-radius: 0.5rem;
+    color: white;
+    border: none;
+  
+  }
+
+  option {
+    border-bottom: 1px solid  hsl(240, 1%, 59%);
+    padding: 0.5rem 0;
+  }
+
+  option:last-child {
+    border-bottom: none;
+  }
+
+  option::checkmark {
+    margin-left: 0.5rem;
+    
+  }
+}
+
+.hr {
+  height: 1px;
+  background-color: hsl(240, 1%, 59%);
+  margin: 1rem;
+}
+
+.text {
+  font-size: 2rem;
+  padding: 1rem;
+  position: relative;
+  color: hsl(240, 1%, 59%);
+}
+
+.start-test {
+  border-radius: 0.5rem;
+  padding: 0.875rem 1.5rem;
+  border: none;
+  outline: none;
+  background-color: hsl(214, 100%, 55%);
+  color: white;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.center p {
+  font-size: 20px;
+}
+
+.center {
+  position: absolute;
+  font-size: 16px;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  text-align: center;
+  z-index: 2;
+}
+
+.restart-button {
+  display: none;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  background-color:  hsl(0, 0%, 15%);
+  border: none;
+  border-radius: 0.5rem;
+  color: white;
+  padding: 0.875rem 1rem;
+  width: fit-content;
+  align-self: center;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.not-started {
+  display: flex;
+  flex-direction: column;
+}
+
+.overlay {
+  position:absolute;
+  top:0;
+  right:0;
+  bottom:0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(6px);
+  z-index: 1;
+  left:0;
+  color:white;
+}
+
+.correct { 
+  color: hsl(140, 63%, 57%) 
+}
+
+.incorrect { 
+  color: hsl(354, 63%, 57%)
+}
+
+#incorrect-char {
+  color: hsl(354, 63%, 57%)
+}
+
+#all-char {
+  color: hsl(140, 63%, 57%)
+}
+
+.current { 
+  background-color: rgba(255, 255, 255, 0.4);
+  border-radius: 0.285rem;
+}
+
+.out-of-time {
+  display: none;
+}
+
+.results {
+  display: flex;
+  flex-direction: column;
+  margin: 1rem;
+  display: none;
+}
+
+.stars {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.star {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 20px;
+}
+
+.check-circle {
+  padding: 0.5rem;
+  background-color: hsla(140, 63%, 57%, 0.2);
+  border-radius: 50%;
+}
+
+.circle {
+  border-radius: 50%;
+  background-color: hsla(140, 63%, 57%, 0.1);
+  padding: 0.5rem;
+}
+
+.header-title {
+  text-align: center;
+  padding-bottom: 1rem;
+}
+
+.header-title p {
+  color:  hsl(240, 3%, 46%);
+  font-size: 16px;
+}
+
+.boxes {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  margin-top: 0.5rem;
+}
+
+.boxes div {
+  border-radius: 0.5rem;
+  border: 1px solid hsl(240, 3%, 46%);
+  padding: 1rem;
+  padding-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.boxes div p {
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.boxes div h3 {
+  font-weight: 400;
+  color: hsl(240, 3%, 46%);
+}
+
+.timer-color {
+  color:  hsl(354, 63%, 57%);
+}
+
+#accuracy {
+  color:  hsl(354, 63%, 57%);
+}
+
+.go-again {
+  width: fit-content;
+  align-self: center;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem;
+  font-weight: 600;
+  border-radius: 0.5rem;
+  border: none;
+  color: black;
+  cursor: pointer;
+}
+
+.go-again svg {
+  color: black;
+}
+
+.star-1 {
+  width: 35px;
+  align-self: self-end;
+  margin-right: 1rem;
+  margin-top: 3rem;
+}
