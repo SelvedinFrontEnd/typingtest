@@ -163,7 +163,17 @@ function calculateWpm() {
     
 }
 
+testSection.addEventListener("click", () => {
+    const hiddenInput = document.getElementById("hidden-input");
+    
+    // Focus the hidden input to trigger mobile keyboard
+    hiddenInput.focus();
 
+    // Start the test if not started yet
+    if (!isTestActive) {
+        startTest.click(); // reuses your existing startTest logic
+    }
+});
 
 document.addEventListener("keydown", (e) => {
     if(!isTestActive) return;
@@ -231,4 +241,5 @@ window.addEventListener("keydown", (e) =>  {
             e.preventDefault();
         }
     }
+
 })
