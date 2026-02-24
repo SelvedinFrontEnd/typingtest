@@ -168,7 +168,7 @@ document.addEventListener("keydown", (e) => {
     startTeste(e)
 })
 
-hiddenInput.addEventListener("keydown", (e) => {
+hidenInput.addEventListener("keydown", (e) => {
     startTeste(e)
 })
 
@@ -250,3 +250,4 @@ function startTeste(e) {
         spans[currentIndex].classList.add("current")
     }    
 }
+
