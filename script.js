@@ -116,6 +116,8 @@ let intervalId;
 let isTestActive = false;
 
 startTest.addEventListener("click", () => {
+    const hiddenInput = document.getElementById("hidden-input");
+    hiddenInput.focus();
     intervalId = setInterval(updateTimer, 1000)
     overlay.style.display = "none"
     center.style.display = "none"
@@ -229,20 +231,7 @@ window.addEventListener("keydown", (e) =>  {
             e.preventDefault();
         }
     }
-
 })
-
-testSection.addEventListener("click", () => {
-    const hiddenInput = document.getElementById("hidden-input");
-    
-    // Focus the hidden input to open mobile keyboard
-    hiddenInput.focus();
-
-    // Also start the test if it hasn’t started yet
-    if (!isTestActive) {
-        startTest.click(); // reuse your existing startTest logic
-    }
-});
 
 hiddenInput.addEventListener("blur", () => {
     if(isTestActive) hiddenInput.focus();
