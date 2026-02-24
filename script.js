@@ -173,7 +173,7 @@ function calculateWpm() {
 
 
 
-document.addEventListener("keydown", (e) => {
+/*document.addEventListener("keydown", (e) => {
     if(!isTestActive) return;
 
     if(ignoredKeys.includes(e.key)) return;
@@ -230,7 +230,7 @@ document.addEventListener("keydown", (e) => {
     if(currentIndex < spans.length) {
         spans[currentIndex].classList.add("current")
     } 
-})    
+})    */
 
 
 window.addEventListener("keydown", (e) =>  {
