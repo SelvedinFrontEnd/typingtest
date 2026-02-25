@@ -213,11 +213,9 @@ function test(character){
 
     if (character === expected) {  
         spans[currentIndex].classList.add("correct")
-        
     } else {
         spans[currentIndex].classList.add("incorrect")
         incorrectLetters++;
-        document.getElementById("console").innerText = character
     }
     
     currentIndex++;
@@ -226,8 +224,6 @@ function test(character){
         spans[currentIndex].classList.add("current")
     } 
 }
-
-
 
 hiddenInput.addEventListener("input", (e) => {
     test(e.target.value)
