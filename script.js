@@ -206,7 +206,10 @@ function test(character){
         document.getElementById("incorrect-char").textContent = incorrectLetters
         return;
     }
-
+    spans[currentIndex].scrollIntoView({
+    behavior: "smooth",
+    block: "center"
+    })
     let expected = spans[currentIndex].innerText
 
     spans.forEach(span => span.classList.remove("current"))
@@ -238,3 +241,4 @@ window.addEventListener("keydown", (e) =>  {
         }
     }
 })
+
