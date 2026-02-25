@@ -1,36 +1,36 @@
 Typing Game / Type Test
 
-A web-based typing game that tests your typing speed and accuracy. It includes multiple time modes, difficulty levels, and tracks your best WPM using local storage.
+A web-based typing game that tests your typing speed and accuracy. Track your progress, challenge yourself with different difficulties, and see your best WPM!
 
 Features
 
-WPM & Accuracy Tracking: Real-time calculation of your typing speed and accuracy.
+WPM & Accuracy Tracking: Real-time calculation of typing speed and accuracy.
 
 Time Modes:
 
-Timed Mode: 60 seconds countdown.
+Timed Mode: 60-second countdown.
 
-Passage Mode: Unlimited time to finish the text.
+Passage Mode: Unlimited time to complete the text.
 
-Difficulty Levels: Easy, Medium, Hard – choose your challenge!
+Difficulty Levels: Easy, Medium, Hard.
 
-Best WPM Tracking: Your highest WPM is stored in local storage for future sessions.
+Best WPM Tracking: Your highest WPM is saved in local storage.
 
 Responsive Design: Works on desktop and mobile devices.
 
 How to Play
 
-Select a time mode (Timed 60s or Unlimited Passage).
+Choose a time mode (Timed or Passage).
 
-Choose a difficulty level (Easy / Medium / Hard).
+Select a difficulty level (Easy / Medium / Hard).
 
-Start typing the displayed text as accurately and fast as possible.
+Start typing the displayed text.
 
-Check your WPM and accuracy after completing the text.
+Your WPM and accuracy are calculated in real-time.
 
-Your best WPM is saved automatically for next time.
+Your best WPM is automatically saved for future sessions.
 
-Technologies Used
+Technologies
 
 HTML
 
