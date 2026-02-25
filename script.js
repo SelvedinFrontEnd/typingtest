@@ -118,7 +118,7 @@ let intervalId;
 let isTestActive = false;
 
 startTest.addEventListener("click", () => {
-    hiddenInput.focus()
+    hiddenInput.focus({ preventScroll: true });
     intervalId = setInterval(updateTimer, 1000)
     overlay.style.display = "none"
     center.style.display = "none"
@@ -245,5 +245,6 @@ window.addEventListener("keydown", (e) =>  {
         }
     }
 })
+
 
 
