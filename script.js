@@ -213,9 +213,11 @@ function test(character){
 
     if (character === expected) {  
         spans[currentIndex].classList.add("correct")
+        
     } else {
         spans[currentIndex].classList.add("incorrect")
         incorrectLetters++;
+        document.getElementById("console").innerText = character
     }
     
     currentIndex++;
@@ -225,10 +227,11 @@ function test(character){
     } 
 }
 
-
 hiddenInput.addEventListener("input", (e) => {
-    test(e.key)
+    test(e.target.value)
+    e.target.value = ""
 })
+
 
 window.addEventListener("keydown", (e) =>  {
     if(e.key === " " || e.keyCode == 32) {
@@ -237,5 +240,3 @@ window.addEventListener("keydown", (e) =>  {
         }
     }
 })
-
-
