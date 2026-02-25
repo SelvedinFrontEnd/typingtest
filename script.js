@@ -229,6 +229,9 @@ document.addEventListener("keydown", (e) => {
     test(e.key)
 })    
 
+hiddenInput.addEventListener("input", (e) => {
+    test(e.key)
+})
 
 window.addEventListener("keydown", (e) =>  {
     if(e.key === " " || e.keyCode == 32) {
@@ -237,3 +240,4 @@ window.addEventListener("keydown", (e) =>  {
         }
     }
 })
+
