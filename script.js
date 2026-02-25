@@ -12,6 +12,7 @@ let textTest;
 let correct;
 let testSection = document.getElementById("test-section")
 let testCompleted = document.getElementById("results")
+let goAgain = document.getElementById("go-again")
 
 let hiddenInput = document.getElementById("hidden-input")
 
@@ -42,7 +43,6 @@ function getRandomNumber(max) {
     return Math.floor(Math.random() * max) 
 }
 
-
 async function getData() {
     try { 
         const response = await fetch("./data.json")
@@ -58,8 +58,6 @@ async function getData() {
 
 getData()
 
-
-
 timeMode.addEventListener("change", () => {
     if(timeMode.value === "passage") {
         timer = 0
@@ -70,13 +68,6 @@ timeMode.addEventListener("change", () => {
     }
 
 })
-
-
-
-
-
-
-
 
 function updateTimer() {
     if(!isTestActive) return;
@@ -118,7 +109,7 @@ let intervalId;
 let isTestActive = false;
 
 startTest.addEventListener("click", () => {
-    hiddenInput.focus({ preventScroll: true });
+    document.querySelector(".text").focus()
     intervalId = setInterval(updateTimer, 1000)
     overlay.style.display = "none"
     center.style.display = "none"
@@ -130,6 +121,27 @@ startTest.addEventListener("click", () => {
     mode.disabled = true;
     timeMode.disabled = true;
 })
+
+/*goAgain.addEventListener("click", () => {
+    console.log("test")
+    hiddenInput.focus()
+    intervalId = setInterval(updateTimer, 1000)
+    overlay.style.display = "none"
+    center.style.display = "none"
+    restartButton.style.display = "flex"
+    testSection.style.display = "flex"
+    testCompleted.style.display = "none"
+    isTestActive = true;
+    const spans = text.querySelectorAll("span")
+    spans[0].classList.add("current") 
+    currentIndex = 0
+    mode.disabled = true;
+    timeMode.disabled = true;
+})*/
+
+function testStart() {
+
+}
 
 let currentIndex = 0;
 
@@ -166,13 +178,12 @@ function calculateWpm() {
     
 }
 
-
 function test(character){
     if(!isTestActive) return;
     
     if(ignoredKeys.includes(character)) return;
     
-    spans = text.querySelectorAll("span");
+    let spans = text.querySelectorAll("span");
     if(currentIndex >= spans.length - 1) {
         isTestActive = false;
         testSection.style.display = "none"
@@ -206,7 +217,8 @@ function test(character){
         document.getElementById("incorrect-char").textContent = incorrectLetters
         return;
     }
-  let currentLetter = spans[currentIndex]
+
+    let currentLetter = spans[currentIndex]
     let rect = currentLetter.getBoundingClientRect()
     if (rect.bottom > window.innerHeight) {
     window.scrollBy({
@@ -232,9 +244,12 @@ function test(character){
     } 
 }
 
-hiddenInput.addEventListener("input", (e) => {
-    test(e.target.value)
-    e.target.value = ""
+document.querySelector(".text").addEventListener("keydown", (e) => {
+    test(e.key)
+})
+
+document.querySelector(".text").addEventListener("click", () => {
+    document.querySelector(".text").focus()
 })
 
 
@@ -245,8 +260,3 @@ window.addEventListener("keydown", (e) =>  {
         }
     }
 })
-
-
-
-
-
