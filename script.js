@@ -227,9 +227,7 @@ function test(character){
     } 
 }
 
-document.addEventListener("keydown", (e) => {
-    test(e.key)
-})    
+
 
 hiddenInput.addEventListener("input", (e) => {
     test(e.target.value)
@@ -244,4 +242,3 @@ window.addEventListener("keydown", (e) =>  {
         }
     }
 })
-
