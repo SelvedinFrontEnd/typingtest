@@ -166,17 +166,14 @@ function calculateWpm() {
     
 }
 
-hiddenInput.addEventListener("input", (e) => {
-    if(!isTestActive) return;
 
-    const typedChar = hiddenInput.value;
-    hiddenInput.value = "";
-    document.getElementById("debug").innerText =
-  "Typed: " + JSON.stringify(hiddenInput.value);
-    if(ignoredKeys.includes(e.key)) return;
+function test(character){
+    if(!isTestActive) return;
+    
+    if(ignoredKeys.includes(character)) return;
     
     spans = text.querySelectorAll("span");
-    if(currentIndex === spans.length) {
+    if(currentIndex >= spans.length - 1) {
         isTestActive = false;
         testSection.style.display = "none"
         testCompleted.style.display = "block"
@@ -200,7 +197,6 @@ hiddenInput.addEventListener("input", (e) => {
         let safeTimed = wpmTimed || 0
         let safePassage = wpmPassage || 0
         let finalWPM = Math.max(Math.round(safePassage), Math.round(safeTimed))
-        console.log(finalWPM, safePassage, Math.round(safeTimed))
         let best = Number(localStorage.getItem("bestWPM")) || 0;
         if(finalWPM > best) {
             localStorage.setItem("bestWPM", finalWPM);
@@ -211,11 +207,11 @@ hiddenInput.addEventListener("input", (e) => {
         return;
     }
 
-    let expected = text.querySelectorAll("span")[currentIndex].innerText
+    let expected = spans[currentIndex].innerText
 
     spans.forEach(span => span.classList.remove("current"))
 
-    if (typedChar === expected) {  
+    if (character === expected) {  
         spans[currentIndex].classList.add("correct")
     } else {
         spans[currentIndex].classList.add("incorrect")
@@ -227,67 +223,10 @@ hiddenInput.addEventListener("input", (e) => {
     if(currentIndex < spans.length) {
         spans[currentIndex].classList.add("current")
     } 
-}) 
-
+}
 
 document.addEventListener("keydown", (e) => {
-    if(!isTestActive) return;
-
-    
-    if(ignoredKeys.includes(e.key)) return;
-    
-    spans = text.querySelectorAll("span");
-    if(currentIndex === spans.length) {
-        isTestActive = false;
-        testSection.style.display = "none"
-        testCompleted.style.display = "block"
-        correct = currentIndex - incorrectLetters
-        let accuracy = correct / currentIndex * 100
-        let accurate = Math.round(accuracy)
-        let wpmTimed;
-        let wpmPassage;
-        document.getElementById("accuracy-final").innerText = `${accurate}%`
-        if(timeMode.value === "timed") {
-            let currentTimeTimed = 60 - timer
-            let minutesTimed = currentTimeTimed / 60
-            wpmTimed = correct / 5 / minutesTimed
-            document.getElementById("wpm-final").innerText = Math.round(wpmTimed) 
-        } else {
-            let currentTimePassage = timer / 60
-            wpmPassage = correct / 5 / currentTimePassage
-            document.getElementById("wpm-final").innerText = Math.round(wpmPassage)
-        }
-
-        let safeTimed = wpmTimed || 0
-        let safePassage = wpmPassage || 0
-        let finalWPM = Math.max(Math.round(safePassage), Math.round(safeTimed))
-        console.log(finalWPM, safePassage, Math.round(safeTimed))
-        let best = Number(localStorage.getItem("bestWPM")) || 0;
-        if(finalWPM > best) {
-            localStorage.setItem("bestWPM", finalWPM);
-            document.getElementById("best-wpm").innerText = finalWPM;
-        }
-        document.getElementById("all-char").textContent = spans.length
-        document.getElementById("incorrect-char").textContent = incorrectLetters
-        return;
-    }
-
-    let expected = text.querySelectorAll("span")[currentIndex].innerText
-
-    spans.forEach(span => span.classList.remove("current"))
-
-    if (e.key === expected) {  
-        spans[currentIndex].classList.add("correct")
-    } else {
-        spans[currentIndex].classList.add("incorrect")
-        incorrectLetters++;
-    }
-    
-    currentIndex++;
-
-    if(currentIndex < spans.length) {
-        spans[currentIndex].classList.add("current")
-    } 
+    test(e.key)
 })    
 
 
@@ -298,4 +237,3 @@ window.addEventListener("keydown", (e) =>  {
         }
     }
 })
-
