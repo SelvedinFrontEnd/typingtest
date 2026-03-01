@@ -7,61 +7,65 @@
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
   <link rel="stylesheet" href="style.css">
   
-  <title>Frontend Mentor | Typing Speed Test</title>
+  <title>Typing Speed Test</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
 </head>
 <body>
   <div class="header">
         <img class="logo" src="./assets/images/logo-small.svg" alt="Logo">
+        <img class="desktop-logo" src="./assets/images/logo-large.svg" alt="Desktop-logo">
         <div class="best-score">
           <img src="./assets/images/icon-personal-best.svg" alt="Trohpy"> 
-          <p>Best: <span id="best-wpm">0</span> <span>WPM</span></p>
+          <p>Personal best: <span id="best-wpm">0</span> <span>WPM</span></p>
         </div>
       </div>
   <section class="not-started" id="test-section">
-    <input 
-      type="text"
-      id="hidden-input"
-      autocorrect="off"
-      autocomplete="off"
-      autocapitalize="off"
-      spellcheck="false"
-      style="position:absolute; opacity:0; left:-9999px;">
 
-    <div class="stats">
-      <div class="stat">
-        <p>WPM:</p>
-        <p id="wpm">0</p> 
+    <div class="headline-desktop">
+      <div class="stats">
+        <div class="stat">
+          <p>WPM:</p>
+          <p id="wpm">0</p> 
+        </div>
+        <div class="stat">
+          <p>Accuracy:</p>
+          <p id="accuracy">0%</p> 
+        </div>
+        <div class="stat">
+          <p>Time:</p>
+          <p class="time-yellow">0:<span id="timer">60</span></p> 
+        </div>
       </div>
-      <div class="stat">
-        <p>Accuracy:</p>
-        <p id="accuracy">0%</p> 
-      </div>
-      <div class="stat">
-        <p>Time:</p>
-        <p class="time-yellow">0:<span id="timer">60</span></p> 
-      </div>
-    </div>
 
-    <div class="selects">
-        <select name="mode" id="mode">
-          
-          <option value="easy">Easy</option>
-          <option value="medium">Medium</option>
-          <option value="hard">Hard</option>
+      <div class="selects-desktop">
+        <div class="difficulty" id="difficulty-btns">
+          <h4>Difficulty:</h4>
+          <button class="active" value="easy">Easy</button>
+          <button value="medium">Medium</button>
+          <button value="hard">Hard</button>
+        </div>
+        <div class="time-mode" id="time-btns">
+          <h4>Mode:</h4>
+          <button class="active" value="timed">Timed (60s)</button>
+          <button value="passage">Passage</button>
+        </div>
+      </div>
+      
+      <div class="selects">
+          <select name="mode" id="mode">    
+            <option value="easy">Easy</option>
+            <option value="medium">Medium</option>
+            <option value="hard">Hard</option>
+          </select>
+
+
+          <select name="mode" id="time-mode">
+          <option value="timed" id="timed-option">Timed (60)</option>
+          <option value="passage" id="passage-option">Passage</option>
         </select>
-
-
-        <select name="mode" id="time-mode">
-        <option value="timed" id="timed-option">Timed (60)</option>
-        <option value="passage" id="passage-option">Passage</option>
-      </select>
+      </div>
     </div>
+    
     
     <div class="hr">
     </div>
@@ -122,7 +126,7 @@
     </div>
   </div>
 
-  <button class="go-again" id="go-again">Go Again 
+  <button class="go-again" id="go-again"><span class="again-btn-text">Go Again</span>
     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 20 20">
       <path fill="currentColor" d="M1.563 1.281h.949c.246 0 .422.211.422.457l-.07 3.446a8.6 8.6 0 0 1 7.277-3.868c4.816 0 8.718 3.938 8.718 8.72-.035 4.816-3.937 8.683-8.718 8.683a8.86 8.86 0 0 1-5.871-2.215.446.446 0 0 1 0-.633l.703-.703c.14-.14.386-.14.562 0 1.23 1.09 2.813 1.723 4.606 1.723A6.88 6.88 0 0 0 17.03 10c0-3.797-3.093-6.89-6.89-6.89-2.813 0-5.203 1.687-6.293 4.078l4.43-.106c.245 0 .456.176.456.422v.95c0 .245-.21.421-.421.421h-6.75a.406.406 0 0 1-.422-.422v-6.75c0-.21.175-.422.422-.422"/>
     </svg>
@@ -130,15 +134,12 @@
   <img class="star-1" src="assets/images/pattern-star-1.svg" alt="">
   </section>
   <!-- Test Complete End --> 
-
+  
   <section class="out-of-time" id="out-of-time">
     <h1>You run out of time</h1>
     <p></p>
   </section>
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
-    Coded by <a href="https://selvedin.netlify.app/">Selvedin</a>.
-  </div>
+
 </body>
 <script src="script.js"></script>
 </html>

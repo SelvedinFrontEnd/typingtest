@@ -13,13 +13,52 @@ let correct;
 let testSection = document.getElementById("test-section")
 let testCompleted = document.getElementById("results")
 let goAgain = document.getElementById("go-again")
-
 let hiddenInput = document.getElementById("hidden-input")
-
 let best = localStorage.getItem("bestWPM");
+let desktopDifficultyBtns = document.getElementById("difficulty-btns")
+let desktopTimeModeBtns = document.getElementById("time-btns")
+let gameTimeMode = "timed"
+let title = document.querySelector(".header-title h1")
+let description = document.querySelector(".header-title p")
+let againBtnText = document.querySelector(".again-btn-text")
+
 if (best) {
     document.getElementById("best-wpm").innerText = best;
 }
+
+function removeActiveDifficultyBtns() {
+    let difficultyButtons = document.querySelectorAll("#difficulty-btns button");
+    difficultyButtons.forEach(button => {
+        button.classList.remove("active")
+    })
+}
+
+const difficultyBtns = document.querySelectorAll("#difficulty-btns button");
+difficultyBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+        removeActiveDifficultyBtns()
+        btn.classList.add('active');
+    })
+})
+
+
+function removeActiveTimeBtns() {
+    let timeButtons = document.querySelectorAll("#time-btns button");
+    timeButtons.forEach(button =>{
+        button.classList.remove("active")
+    })
+}
+
+const timeBtns = document.querySelectorAll("#time-btns button");
+timeBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+        removeActiveTimeBtns()
+        updateTimerUi(btn.value)
+        gameTimeMode = btn.value
+        timeMode.value = btn.value
+        btn.classList.add('active');
+    })
+})
 
 function renderText(passageText) {
     let lettersArray = passageText.split("")
@@ -30,14 +69,51 @@ function renderText(passageText) {
     text.innerHTML = finalHtmlString
 }
 
+function updateActiveButton(selectedValue) {
+    difficultyBtns.forEach(btn => {
+        btn.classList.remove("active");
+        if (btn.value === selectedValue) {
+            btn.classList.add("active");
+        }
+    });
+}
+
+function updateActiveTimeButton(selectedValue){
+    timeBtns.forEach(btn => {
+        btn.classList.remove("active");
+        if (btn.value === selectedValue) {
+            btn.classList.add("active");
+        }
+    });
+}
+
+difficultyBtns.forEach(btn => {
+    btn.addEventListener("click", () => {    
+        mode.value = btn.value
+        modeFetchData(btn.value)
+    })
+})
+
 mode.addEventListener("change", () => {
+    modeFetchData(mode.value);
+    updateActiveButton(mode.value);
+})
+
+timeMode.addEventListener("change", () => {
+    updateTimerUi(timeMode.value)
+    updateActiveTimeButton(timeMode.value)
+    gameTimeMode = timeMode.value;
+    
+})
+
+function modeFetchData(modeValue) {
     if(data){
-        let selectedValue = mode.value
+        let selectedValue = modeValue
         const randomNumber = getRandomNumber(data[selectedValue].length)
         textTest = data[selectedValue][randomNumber].text
         renderText(textTest)
     }
-})
+}
 
 function getRandomNumber(max) {
     return Math.floor(Math.random() * max) 
@@ -58,28 +134,30 @@ async function getData() {
 
 getData()
 
-timeMode.addEventListener("change", () => {
-    if(timeMode.value === "passage") {
+function updateTimerUi(modeValue) {
+    if(modeValue === "passage") {
         timer = 0
         document.getElementById("timer").innerHTML = timer
     } else {
         timer = 60
         document.getElementById("timer").innerHTML = timer 
     }
+}
 
-})
+
+
+let accuracy;
 
 function updateTimer() {
     if(!isTestActive) return;
 
-    if(timeMode.value === "timed") {
+    if(gameTimeMode === "timed") {
         timer--;
         document.getElementById("timer").innerHTML = timer;
         correct = currentIndex - incorrectLetters
         if(currentIndex > 0) {
-            let accuracy = correct / currentIndex * 100
-            let accurate = Math.round(accuracy)
-            document.getElementById("accuracy").innerText = `${accurate}%`
+            accuracy = Math.round(correct / currentIndex * 100)
+            document.getElementById("accuracy").innerText = `${accuracy}%`
         } 
         calculateWpm()
         if(timer <= 0) {
@@ -93,23 +171,25 @@ function updateTimer() {
         document.getElementById("timer").innerHTML = timer;
         correct = currentIndex - incorrectLetters
         if(currentIndex > 0) {
-           let accuracy = correct / currentIndex * 100
-            let accurate = Math.round(accuracy)
-            document.getElementById("accuracy").innerText = `${accurate}%` 
+            accuracy = Math.round(correct / currentIndex * 100)
+            document.getElementById("accuracy").innerText = `${accuracy}%` 
         }
         calculateWpm()
-        if(timer >= 60) {
-            clearInterval(intervalId);
-        } 
     }
-    
 }
 
 let intervalId;
 let isTestActive = false;
 
 startTest.addEventListener("click", () => {
-    document.querySelector(".text").focus()
+    difficultyBtns.forEach(btn => {
+        btn.disabled = true;
+        btn.style.cursor = "default"
+    })
+    timeBtns.forEach(btn => {
+        btn.disabled = true;
+        btn.style.cursor = "default"
+    })
     intervalId = setInterval(updateTimer, 1000)
     overlay.style.display = "none"
     center.style.display = "none"
@@ -122,28 +202,68 @@ startTest.addEventListener("click", () => {
     timeMode.disabled = true;
 })
 
-/*goAgain.addEventListener("click", () => {
-    console.log("test")
-    hiddenInput.focus()
-    intervalId = setInterval(updateTimer, 1000)
-    overlay.style.display = "none"
-    center.style.display = "none"
-    restartButton.style.display = "flex"
+goAgain.addEventListener("click", () => {
+    clearInterval(intervalId)
+    difficultyBtns.forEach(btn => {
+        btn.disabled = false;
+        btn.style.cursor = "pointer"
+    })
+    timeBtns.forEach(btn => {
+        btn.disabled = false;
+        btn.style.cursor = "pointer"
+    })
     testSection.style.display = "flex"
+    overlay.style.display = "flex"
+    center.style.display = "flex"
+    restartButton.style.display = "none"
     testCompleted.style.display = "none"
-    isTestActive = true;
-    const spans = text.querySelectorAll("span")
-    spans[0].classList.add("current") 
-    currentIndex = 0
-    mode.disabled = true;
-    timeMode.disabled = true;
-})*/
+    wpmPassage = 0;
+    wpmTimed = 0;
+    accuracy = 0;
+    document.getElementById("accuracy").innerText = `${accuracy}%`
+    currentIndex = 0;
+    incorrectLetters = 0;
+    correct = 0;
+    mode.disabled = false;
+    timeMode.disabled = false;
+    if(timeMode.value === "timed") {
+        timer = 60;
+        document.getElementById("timer").innerHTML = timer
+        document.getElementById("wpm").innerText = wpmTimed
+    } else {
+        timer = 0;
+        document.getElementById("timer").innerHTML = timer
+        document.getElementById("wpm").innerText = wpmPassage
+    }
 
-function testStart() {
+    getData()
+    
+})
 
-}
+restartButton.addEventListener("click", () => {
+    wpmPassage = 0;
+    wpmTimed = 0;
+    accuracy = 0;
+    document.getElementById("accuracy").innerText = `${accuracy}%`
+    currentIndex = 0;
+    incorrectLetters = 0;
+    correct = 0;
+    if(gameTimeMode === "timed") {
+        timer = 60;
+        document.getElementById("timer").innerHTML = timer
+        document.getElementById("wpm").innerText = wpmTimed
+    } else {
+        timer = 0;
+        document.getElementById("timer").innerHTML = timer
+        document.getElementById("wpm").innerText = wpmPassage
+    }
+    getData()
+    let spans = text.querySelectorAll("span");
+    spans[currentIndex].classList.add("current")
+})
 
 let currentIndex = 0;
+let incorrectLetters = 0;
 
 const ignoredKeys = [
   "Shift",
@@ -160,23 +280,24 @@ const ignoredKeys = [
   "Backspace"
 ]
 
-let incorrectLetters = 0;
+
 
 function calculateWpm() {
-    if(timeMode.value === "timed") {
+    if(gameTimeMode === "timed") {
         let currentTimeTimed = 60 - timer
         let minutesTimed = currentTimeTimed / 60
-        let wpmTimed = correct / 5 / minutesTimed
+        wpmTimed = correct / 5 / minutesTimed
         document.getElementById("wpm").innerText = Math.round(wpmTimed) 
-    } else if(timeMode.value === "passage") {
-        console.log(timeMode.value)
+    } else if(gameTimeMode === "passage") {
         let currentTimePassage = timer / 60
-        let wpmPassage = correct / 5 / currentTimePassage
-        console.log(wpmPassage, currentIndex, timer, correct, "test")
+        wpmPassage = correct / 5 / currentTimePassage
         document.getElementById("wpm").innerText = Math.round(wpmPassage)
     }
     
 }
+
+let wpmTimed;
+let wpmPassage;
 
 function test(character){
     if(!isTestActive) return;
@@ -186,15 +307,18 @@ function test(character){
     let spans = text.querySelectorAll("span");
     if(currentIndex >= spans.length - 1) {
         isTestActive = false;
+        
+        clearInterval(intervalId)
         testSection.style.display = "none"
         testCompleted.style.display = "block"
+        spans[currentIndex].classList.remove("current")
+        spans[currentIndex].classList.remove("correct")
+        spans[currentIndex].classList.remove("incorrect")
         correct = currentIndex - incorrectLetters
         let accuracy = correct / currentIndex * 100
         let accurate = Math.round(accuracy)
-        let wpmTimed;
-        let wpmPassage;
         document.getElementById("accuracy-final").innerText = `${accurate}%`
-        if(timeMode.value === "timed") {
+        if(gameTimeMode === "timed") {
             let currentTimeTimed = 60 - timer
             let minutesTimed = currentTimeTimed / 60
             wpmTimed = correct / 5 / minutesTimed
@@ -212,19 +336,18 @@ function test(character){
         if(finalWPM > best) {
             localStorage.setItem("bestWPM", finalWPM);
             document.getElementById("best-wpm").innerText = finalWPM;
+            title.innerText = "High Score Smashed!"
+            description.innerText = "You're getting faster. That was incredible typing."
+            againBtnText.innerText = "Beath This Score"
         }
         document.getElementById("all-char").textContent = spans.length
         document.getElementById("incorrect-char").textContent = incorrectLetters
+         if(best === 0) {
+            title.innerText = "Baseline Established!"
+            description.innerText = "You've set the bar. Now the real challenge begins-time to beat it."
+            againBtnText.innerText = `Beat This Score`
+        } 
         return;
-    }
-
-    let currentLetter = spans[currentIndex]
-    let rect = currentLetter.getBoundingClientRect()
-    if (rect.bottom > window.innerHeight) {
-    window.scrollBy({
-        top: 50,
-        behavior: "smooth"
-    })
     }
     let expected = spans[currentIndex].innerText
 
@@ -244,12 +367,8 @@ function test(character){
     } 
 }
 
-document.querySelector(".text").addEventListener("keydown", (e) => {
+document.addEventListener("keydown", (e) => {
     test(e.key)
-})
-
-document.querySelector(".text").addEventListener("click", () => {
-    document.querySelector(".text").focus()
 })
 
 
@@ -260,3 +379,7 @@ window.addEventListener("keydown", (e) =>  {
         }
     }
 })
+
+
+
+

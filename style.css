@@ -80,7 +80,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     justify-items: center;
-    justify-content: space-between;;
+    justify-content: space-between;
 }
 
 .stat {
@@ -154,6 +154,7 @@ select {
   padding: 1rem;
   position: relative;
   color: hsl(240, 1%, 59%);
+  outline: none;
 }
 
 .start-test {
@@ -217,6 +218,7 @@ select {
   z-index: 1;
   left:0;
   color:white;
+  padding: 1rem;
 }
 
 .correct { 
@@ -246,6 +248,7 @@ select {
 
 .results {
   display: flex;
+  justify-content: center;
   flex-direction: column;
   margin: 1rem;
   display: none;
@@ -317,8 +320,8 @@ select {
   color: hsl(240, 3%, 46%);
 }
 
-.timer-color {
-  color:  hsl(354, 63%, 57%);
+.time-yellow {
+  color: yellow !important;
 }
 
 #accuracy {
@@ -327,7 +330,6 @@ select {
 
 .go-again {
   width: fit-content;
-  align-self: center;
   display: flex;
   align-items: center;
   gap: 0.5rem;
@@ -337,6 +339,7 @@ select {
   border: none;
   color: black;
   cursor: pointer;
+  place-self: center;
 }
 
 .go-again svg {
@@ -345,7 +348,123 @@ select {
 
 .star-1 {
   width: 35px;
-  align-self: self-end;
+  place-self: self-end;
   margin-right: 1rem;
   margin-top: 3rem;
+
 }
+
+.selects-desktop {
+  display: none;
+}
+
+.desktop-logo {
+  display: none;
+}
+
+@media (min-width: 910px) {
+  .not-started {
+    max-width: 1000px;
+    align-self: center;
+    place-self: center;
+  }
+
+  .header {
+    max-width: 1000px;
+    padding: 1rem 1rem;
+    place-self: center;
+    width: 100%;
+  }
+
+  .results {
+    place-self: center;
+    padding: 1rem;
+  }
+  
+  .boxes {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+   }
+
+   .boxes div {
+    padding: 0.875rem;
+   }
+
+  .selects {
+    display: none;
+  }
+
+  .selects-desktop {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-left: auto;
+  }
+
+  .selects-desktop div {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .selects-desktop div:first-child {
+    border-right: 1px solid gray;
+    padding-right: 0.5rem;
+  }
+
+  .selects-desktop div button {
+    border: 1px solid gray;
+    border-radius: 0.5rem;
+    padding: 0.275rem;
+    font-size: 14px;
+    background-color: transparent;
+    color: white;
+    cursor: pointer;
+  }
+
+  .selects-desktop div button:focus {
+    color: hsl(210, 100%, 65%);
+    border: 1px solid hsl(210, 100%, 65%);
+  }
+
+  .selects-desktop h4 {
+    font-size: 14px;
+    font-weight: 300;
+    color: hsl(240, 1%, 59%);
+  }
+
+  .headline-desktop {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+    margin-right: 1rem;
+  }
+
+  .stats {
+    gap: 1rem;
+    align-items: center;
+    justify-content: normal;
+  }
+
+  .stat {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .active {
+    color: hsl(210, 100%, 65%) !important;
+    border: 1px solid hsl(210, 100%, 65%) !important ;
+   }
+
+   .logo {
+    display: none;
+   }
+
+   .desktop-logo {
+    display: flex;
+   }
+
+   
+}
+
